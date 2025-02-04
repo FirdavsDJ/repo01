@@ -1,0 +1,547 @@
+#!/bin/bash
+
+display_menu() {
+            echo "What would you like to do? Please select an option by entering the corresponding number:"
+                echo "1) Use Calculator"
+                    echo "2) Create a File"
+                        echo "3) Create a Directory"
+                            echo "4) Create a User"
+                                echo "5) Find a File or Directory"
+                                    echo "6) Delete a File or Directory"
+                                        echo "7) List Files and Directories"
+                                            echo "8) Show Contents of a File"
+                                                echo "9) Show Contents of a Directory"
+                                                    echo "10) Become a Root User"
+                                                        echo "11) Exit"
+                                                            sleep 1  # Add delay before next input    
+                                                    }
+
+                                                    get_user_info() {
+                                                                read -p "Hello! What's your name? " name
+                                                                    sleep 1
+                                                                        read -p "Nice to meet you, $name! How old are you? " age
+                                                                            sleep 1
+                                                                                read -p "Where do you live? " location
+                                                                                    sleep 1
+
+                                                                                        echo "It's great to have you here, $name from $location!"
+                                                                                            sleep 1   
+                                                                                                if [ "$age" -lt 20 ]; then
+                                                                                                      
+          echo "Wow, you're quite young!"
+                                                                                                      
+              elif [ "$age" -lt 60 ]; then
+                                                                                                      
+                              echo "You're in the prime of your life!"
+                                                                                                      
+                                  else
+                                                                                                      
+                                                  echo "Age is just a number! Wisdom comes with age!" 
+                                                                                                      
+                                                      fi
+                                                                                                      
+                                                          sleep 1
+                                                                                                      
+                                                              echo "I am AWS CloudShell, here to assist you with various tasks."
+                                                                                                      
+                                                                  sleep 2
+                                                                                                      
+                                                          }
+
+                                                                                                      
+                                                          calculator() {
+                                                                                                      
+                                                                      echo "Let's do some calculations!"
+                                                                                                      
+                                                                          sleep 1
+                                                                                                      
+                                                                              echo "Please enter your operation in the format: [operation] [number1] [number2]"
+                                                                                                      
+                                                                                  sleep 1
+                                                                                                      
+                                                                                      echo "Available operations: add, subtract, multiply, divide, power"
+                                                                                                      
+                                                                                          read -p "What operation would you like to perform? " operation num1 num2
+                                                                                                      
+
+                                                                                                      
+                                                                                              echo "Processing your request..."
+                                                                                                      
+                                                                                                  sleep 2  # Simulate processing time
+
+                                                                                                      
+                                                                                                      
+case "$operation" in
+                                                                                                      
+                                                                                                      
+                add)
+                                                                                                      
+                                                                                                      
+                       result=$(echo "$num1 + $num2" | bc)
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+                   subtract)
+                                                                                                      
+                                                                                                      
+                       result=$(echo "$num1 - $num2" | bc)
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+                   multiply)
+                                                                                                      
+                                                                                                      
+                       result=$(echo "$num1 * $num2" | bc)
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+                   divide)
+                                                                                                      
+                                                                                                      
+                       if [ "$num2" -eq 0 ]; then
+                                                                                                      
+                                                                                                      
+                       echo "Error: Division by zero is not allowed."
+                                                                                                      
+                                                                                                      
+                       return
+                                                                                                      
+                                                                                                      
+                   fi
+                                                                                                      
+                                                                                                      
+                       result=$(echo "scale=2; $num1 / $num2" | bc)
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+                   power)
+                                                                                                      
+                                                                                                      
+                       result=$(echo "$num1 ^ $num2" | bc)
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+                   *)
+                                                                                                      
+                                                                                                      
+                       echo "Invalid operation. Please try again."
+                                                                                                      
+                                                                                                      
+                   return
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+           esac
+                                                                                                      
+                                                                                                      
+               echo "The result of your operation is: $result"
+                                                                                                      
+                                                                                                      
+           sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           create_file() {
+                                                                                                      
+                                                                                                      
+               read -p "What would you like to name the file you want to create? " filename
+                                                                                                      
+                                                                                                      
+           echo "Creating the file..."
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+           touch "$filename"
+                                                                                                      
+                                                                                                      
+               echo "File '$filename' has been successfully created."
+                                                                                                      
+                                                                                                      
+           sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           create_directory() {
+                                                                                                      
+                                                                                                      
+               read -p "What would you like to name the directory you want to create? " dirname       
+                                                                                                      
+                                                                                                      
+           echo "Creating the directory..."
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+           mkdir -p "$dirname"
+                                                                                                      
+                                                                                                      
+               echo "Directory '$dirname' has been successfully created."
+                                                                                                      
+                                                                                                      
+           sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           create_user() {
+                                                                                                      
+                                                                                                      
+               read -p "What username would you like to create? " username
+                                                                                                      
+                                                                                                      
+           echo "Creating the user..."
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+           sudo useradd "$username"
+                                                                                                      
+                                                                                                      
+               echo "User '$username' has been successfully created."
+                                                                                                      
+                                                                                                      
+           sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           find_file_or_directory() {
+                                                                                                      
+                                                                                                      
+               read -p "What is the name of the file or directory you would like to find? " name      
+                                                                                                      
+                                                                                                      
+           echo "Searching for '$name'..."
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+           found=$(find / -name "$name" 2>/dev/null)
+                                                                                                      
+                                                                                                      
+               if [ -z "$found" ]; then
+                                                                                                      
+                                                                                                      
+               echo "I couldn't find a file or directory with the name '$name'."
+                                                                                                      
+                                                                                                      
+           else
+                                                                                                      
+                                                                                                      
+                   echo "Here are the results I found:"
+                                                                                                      
+                                                                                                      
+                   echo "$found"
+                                                                                                      
+                                                                                                      
+               fi
+                                                                                                      
+                                                                                                      
+           sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           delete_file_or_directory() {
+                                                                                                      
+                                                                                                      
+               read -p "What is the name of the file or directory you wish to delete? " name
+                                                                                                      
+                                                                                                      
+           if [ -e "$name" ]; then
+                                                                                                      
+                                                                                                      
+                   echo "Deleting '$name'..."
+                                                                                                      
+                                                                                                      
+                   sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+                   rm -r "$name"
+                                                                                                      
+                                                                                                      
+                   echo "'$name' has been successfully deleted."
+                                                                                                      
+                                                                                                      
+               else
+                                                                                                      
+                                                                                                      
+               echo "Error: I couldn't find '$name' to delete."
+                                                                                                      
+                                                                                                      
+           fi
+                                                                                                      
+                                                                                                      
+               sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+       }
+
+                                                                                                      
+                                                                                                      
+       list_files_and_directories() {
+                                                                                                      
+                                                                                                      
+           echo "Listing all files and directories in the current directory..."
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+           ls -la
+                                                                                                      
+                                                                                                      
+               sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+       }
+
+                                                                                                      
+                                                                                                      
+       show_file_contents() {
+                                                                                                      
+                                                                                                      
+           read -p "What file would you like to see the contents of? " filename
+                                                                                                      
+                                                                                                      
+               if [ -e "$filename" ]; then
+                                                                                                      
+                                                                                                      
+               echo "Displaying the contents of '$filename':"
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+               cat "$filename"
+                                                                                                      
+                                                                                                      
+           else
+                                                                                                      
+                                                                                                      
+                   echo "Error: File '$filename' does not exist."
+                                                                                                      
+                                                                                                      
+               fi
+                                                                                                      
+                                                                                                      
+           sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           show_directory_contents() {
+                                                                                                      
+                                                                                                      
+               read -p "What directory would you like to see the contents of? " dirname
+                                                                                                      
+                                                                                                      
+           if [ -d "$dirname" ]; then
+                                                                                                      
+                                                                                                      
+                   echo "Listing the contents of '$dirname':"
+                                                                                                      
+                                                                                                      
+                   sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+                   ls -la "$dirname"
+                                                                                                      
+                                                                                                      
+               else
+                                                                                                      
+                                                                                                      
+               echo "Error: Directory '$dirname' does not exist."
+                                                                                                      
+                                                                                                      
+           fi
+                                                                                                      
+                                                                                                      
+               sleep 1  # Delay before returning to main menu
+                                                                                                      
+                                                                                                      
+       }
+
+                                                                                                      
+                                                                                                      
+       become_root_user() {
+                                                                                                      
+                                                                                                      
+           echo "Switching you to the root user. Please enter your password if prompted."
+                                                                                                      
+                                                                                                      
+               sleep 2  # Simulate processing time
+                                                                                                      
+                                                                                                      
+           sudo -i
+                                                                                                      
+                                                                                                      
+           }
+
+                                                                                                      
+                                                                                                      
+           get_user_info  # Get user info at the beginning
+                                                                                                      
+                                                                                                      
+           while true; do
+                                                                                                      
+                                                                                                      
+               display_menu
+                                                                                                      
+                                                                                                      
+           read -p "What would you like to do? Please enter your choice: " choice
+
+                                                                                                      
+                                                                                                      
+               case "$choice" in
+                                                                                                      
+                                                                                                      
+               1)
+                                                                                                      
+                                                                                                      
+                   calculator
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               2)
+                                                                                                      
+                                                                                                      
+                   create_file
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               3)
+                                                                                                      
+                                                                                                      
+                   create_directory
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               4)
+                                                                                                      
+                                                                                                      
+                   create_user
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               5)
+                                                                                                      
+                                                                                                      
+                   find_file_or_directory
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               6)
+                                                                                                      
+                                                                                                      
+                   delete_file_or_directory
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               7)
+                                                                                                      
+                                                                                                      
+                   list_files_and_directories
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               8)
+                                                                                                      
+                                                                                                      
+                   show_file_contents
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               9)
+                                                                                                      
+                                                                                                      
+                   show_directory_contents
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               10)
+                                                                                                      
+                                                                                                      
+                   become_root_user
+                                                                                                      
+                                                                                                      
+                       ;;
+                                                                                                      
+                                                                                                      
+               11)
+                                                                                                      
+                                                                                                      
+                   echo "Thank you for using me! Have a great day!"
+                                                                                                      
+                                                                                                      
+                       break
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+                   *)
+                                                                                                      
+                                                                                                      
+                       echo "Hmm, that doesn't seem to be a valid choice. Please select a number between 1 and 11."
+                                                                                                      
+                                                                                                      
+                   ;;
+                                                                                                      
+                                                                                                      
+               esac
+                                                                                                      
+                                                                                                      
+           echo # Blank line for better readability
+                                                                                                      
+                                                                                                      
+           done
